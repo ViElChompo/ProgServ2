@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    Options -Multiviews
+    RewriteEngine On
+    RewriteBase /auth/public
+    # Ne pas réécrire si le fichier ou le répertoire existe
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # Réécrire toutes les autres requêtes vers index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
