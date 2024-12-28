@@ -1,6 +1,16 @@
 <?php
 
 
+/**
+ * Vérifie si l'utilisateur est connecté.
+ *
+ * @return bool
+ */
+function is_user_logged_in(): bool
+{
+    return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+}
+
 function register_user(string $email, string $username, string $password, bool $is_admin = false): bool
 {
     $sql = 'INSERT INTO users(username, email, password, is_admin)
@@ -41,13 +51,12 @@ function logout(): void
 
 /**
  * Récupère le nom d'utilisateur de l'utilisateur actuellement connecté.
+ *
+ * @return string|null
  */
-function current_user()
+function current_user(): ?string
 {
-    if (is_user_logged_in()) {
-        return isset ($_SESSION['username']);
-    }
-    return null;
+    return is_user_logged_in() ? $_SESSION['username'] : null;
 }
 
 function login(string $username, string $password): bool
@@ -78,4 +87,15 @@ function require_login():void
             redirect_to('login.php');
 
     }
+}
+
+/**
+ * Redirige vers une URL spécifiée.
+ *
+ * @param string $url
+ */
+function redirect_to(string $url): void
+{
+    header("Location: $url");
+    exit;
 }
