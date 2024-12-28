@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-require __DIR__ . '/../src/login.php';
+require __DIR__ . '/../src/login_processing_file.php';
 
 // Redirige l'utilisateur vers la page d'accueil s'il est déjà connecté
 if (is_user_logged_in()) {
