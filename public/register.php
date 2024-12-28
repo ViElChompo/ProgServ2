@@ -2,7 +2,9 @@
     require_once '../src/bootstrap.php';
     require_once '../src/register.php';
 
-
+if (is_user_logged_in()) {
+    redirect_to('index.php');
+}
 ?>
 
 <?php view('header', ['title' => 'Register']) ?>
