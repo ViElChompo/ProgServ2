@@ -1,3 +1,5 @@
+
+
 <?php
     require_once '../src/bootstrap.php';
     require_once '../src/register.php';
@@ -7,7 +9,7 @@ if (is_user_logged_in()) {
 }
 ?>
 
-<?php view('header', ['title' => 'Register']) ?>
+<?php view('header', ['title' => 'Register']) ?> 
 
 <form action="register.php" method="post">
     <h1>Sign Up</h1>
