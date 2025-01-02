@@ -1,109 +1,115 @@
 <?php
 
+// Définition des constantes pour les messages flash
+const FLASH = 'FLASH_MESSAGES'; // Clé principale pour stocker les messages flash dans la session
 
-const FLASH = 'FLASH_MESSAGES';
-
-const FLASH_ERROR = 'error';
-const FLASH_WARNING = 'warning';
-const FLASH_INFO = 'info';
-const FLASH_SUCCESS = 'success';
+// Types de messages flash possibles
+const FLASH_ERROR = 'error'; // Type d'erreur
+const FLASH_WARNING = 'warning'; // Type d'avertissement
+const FLASH_INFO = 'info'; // Type d'information
+const FLASH_SUCCESS = 'success'; // Type de succès
 
 /**
-* Create a flash message
-*
-* @param string $name
-* @param string $message
-* @param string $type
-* @return void
-*/
+ * Créer un message flash et l'ajouter à la session
+ *
+ * @param string $name Nom du message flash
+ * @param string $message Contenu du message
+ * @param string $type Type du message (error, warning, info, success)
+ * @return void
+ */
 function create_flash_message(string $name, string $message, string $type): void
 {
-    // remove existing message with the name
+    // Supprime un message existant avec le même nom dans la session
     if (isset($_SESSION[FLASH][$name])) {
-        unset($_SESSION[FLASH][$name]);
+        unset($_SESSION[FLASH][$name]); // Suppression du message précédent s'il existe
     }
-    // add the message to the session
+
+    // Ajoute le nouveau message flash à la session
     $_SESSION[FLASH][$name] = ['message' => $message, 'type' => $type];
 }
 
-
 /**
-* Format a flash message
-*
-* @param array $flash_message
-* @return string
-*/
+ * Formater un message flash pour l'affichage
+ *
+ * @param array $flash_message Le message flash sous forme de tableau (avec message et type)
+ * @return string Le message flash formaté en HTML
+ */
 function format_flash_message(array $flash_message): string
 {
+    // Retourne un message flash formaté en HTML avec la classe appropriée en fonction du type
     return sprintf('<div class="alert alert-%s">%s</div>',
-        $flash_message['type'],
-        $flash_message['message']
+        $flash_message['type'], // Type de message (success, warning, etc.)
+        $flash_message['message'] // Le contenu du message
     );
 }
 
 /**
-* Display a flash message
-*
-* @param string $name
-* @return void
-*/
+ * Afficher un message flash spécifique
+ *
+ * @param string $name Nom du message flash à afficher
+ * @return void
+ */
 function display_flash_message(string $name): void
 {
+    // Vérifie si le message flash existe dans la session
     if (!isset($_SESSION[FLASH][$name])) {
-        return;
+        return; // Si aucun message avec ce nom, rien à faire
     }
 
-    // get message from the session
+    // Récupère le message flash depuis la session
     $flash_message = $_SESSION[FLASH][$name];
 
-    // delete the flash message
+    // Supprime le message flash de la session après l'avoir affiché
     unset($_SESSION[FLASH][$name]);
 
-    // display the flash message
+    // Affiche le message flash formaté
     echo format_flash_message($flash_message);
 }
 
 /**
-* Display all flash messages
-*
-* @return void
-*/
+ * Afficher tous les messages flash
+ *
+ * @return void
+ */
 function display_all_flash_messages(): void
 {
+    // Vérifie si des messages flash existent dans la session
     if (!isset($_SESSION[FLASH])) {
-        return;
+        return; // Si aucun message flash n'est présent, rien à faire
     }
 
-    // get flash messages
+    // Récupère tous les messages flash
     $flash_messages = $_SESSION[FLASH];
 
-    // remove all the flash messages
+    // Supprime tous les messages flash de la session après les avoir affichés
     unset($_SESSION[FLASH]);
 
-    // show all flash messages
+    // Affiche tous les messages flash formatés
     foreach ($flash_messages as $flash_message) {
         echo format_flash_message($flash_message);
     }
 }
 
 /**
-* Flash a message
-*
-* @param string $name
-* @param string $message
-* @param string $type (error, warning, info, success)
-* @return void
-*/
+ * Gérer les messages flash : création ou affichage
+ *
+ * @param string $name Le nom du message flash
+ * @param string $message Le contenu du message flash
+ * @param string $type Le type du message (error, warning, info, success)
+ * @return void
+ */
 function flash(string $name = '', string $message = '', string $type = ''): void
 {
+    // Si tous les paramètres sont fournis, créer un message flash
     if ($name !== '' && $message !== '' && $type !== '') {
-        // create a flash message
         create_flash_message($name, $message, $type);
-    } elseif ($name !== '' && $message === '' && $type === '') {
-        // display a flash message
+    }
+    // Si seul le nom est fourni, afficher ce message flash
+    elseif ($name !== '' && $message === '' && $type === '') {
         display_flash_message($name);
-    } elseif ($name === '' && $message === '' && $type === '') {
-        // display all flash message
+    }
+    // Si aucun paramètre n'est fourni, afficher tous les messages flash
+    elseif ($name === '' && $message === '' && $type === '') {
         display_all_flash_messages();
     }
 }
