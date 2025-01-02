@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+<?php
+    require_once '../src/bootstrap.php';
+    require_once '../src/register.php';
+=======
+>>>>>>> b693e34 (ajouté les commentaires)
+>>>>>>> 9dbc067
 
 
 
@@ -13,8 +24,15 @@
     }
 ?>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<?php view('header', ['title' => 'Register']) ?> 
+=======
+>>>>>>> 9dbc067
 <!-- Affiche le header de la page, en passant un titre personnalisé pour la page d'enregistrement -->
 <?php view('header', ['title' => 'Register']) ?>
+>>>>>>> b693e34 (ajouté les commentaires)
 
 <!-- Formulaire d'inscription pour un nouvel utilisateur -->
 <form action="register.php" method="post">
