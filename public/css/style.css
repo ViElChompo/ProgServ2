@@ -1,0 +1,19 @@
+@import "./reset.css";
+@import "./header.css";
+@import "./form.css";
+@import "./utils.css";
+
+body {
+    font-family: Helvetica, sans-serif;
+    background-color: #030826;
+    color: white;
+}
+
+a {
+    color: #ffff;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+}

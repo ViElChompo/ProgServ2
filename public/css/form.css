@@ -1,0 +1,24 @@
+.form {
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #949bc4;
+    border-radius: 0.5rem;
+}
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.form__control label {
+    color: #949bc4;
+    font-weight: bold;
+}
+
+.form__control input {
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}

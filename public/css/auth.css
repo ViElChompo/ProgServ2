@@ -1,0 +1,36 @@
+main {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display:flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.title {
+    text-align: center;
+    font-size: 48px;
+    text-transform: uppercase;
+    padding:0;
+}
+
+.title__container {
+    display:flex;
+    flex-direction: column;
+}
+
+.sub__title {
+    font-size: 18px;
+    text-align: center;
+}
+
+.btn__register, .btn__login{
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+}
